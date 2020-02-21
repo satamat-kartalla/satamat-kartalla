@@ -1,0 +1,11 @@
+{
+  "type": "postgres",
+  "host": "localhost",
+  "port": 5432,
+  "username": "felix",
+  "password": "",
+  "database": "satamat-kartalla",
+  "entities": ["src/entity/*.ts"],
+  "logging": true,
+  "synchronize": true
+}
