@@ -2,7 +2,7 @@
   "type": "postgres",
   "host": "localhost",
   "port": 5432,
-  "username": "felix",
+  "username": "",
   "password": "",
   "database": "satamat-kartalla",
   "entities": ["src/entity/*.ts"],
