@@ -55,6 +55,7 @@
     "graphql": "^14.6.0",
     "pg": "^7.18.2",
     "reflect-metadata": "^0.1.13",
+    "type-graphql": "^0.17.6",
     "typeorm": "^0.2.22"
   }
 }

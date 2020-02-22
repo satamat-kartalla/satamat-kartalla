@@ -1,25 +1,14 @@
 import express, { Request, Response } from 'express';
 import bodyParser from 'body-parser';
+import { ApolloServer } from 'apollo-server-express';
 import { createConnection } from 'typeorm';
-import { Harbour } from './entity/Harbour';
-const { ApolloServer, gql } = require('apollo-server-express');
+import { buildSchema } from 'type-graphql';
+import { HarbourResolver } from './resolvers/HarbourResolver';
 
-createConnection().then(connection => {
-  const harbourRepository = connection.getRepository(Harbour);
-
-  const typeDefs = gql`
-    type Query {
-      hello: String
-    }
-  `;
-
-  const resolvers = {
-    Query: {
-      hello: () => 'Hello world!',
-    },
-  };
-
-  const server = new ApolloServer({ typeDefs, resolvers });
+async function main() {
+  await createConnection();
+  const schema = await buildSchema({ resolvers: [HarbourResolver] });
+  const server = new ApolloServer({ schema });
   const app = express();
   server.applyMiddleware({ app });
 
@@ -37,4 +26,6 @@ createConnection().then(connection => {
       `🚀 Server ready at http://localhost:8888${server.graphqlPath}`,
     ),
   );
-});
+}
+
+main();

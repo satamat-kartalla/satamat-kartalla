@@ -1,13 +1,22 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseEntity, Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { ObjectType, Field, ID } from 'type-graphql';
 
 @Entity()
-export class Harbour {
+@ObjectType()
+export class Harbour extends BaseEntity {
+  @Field(() => ID)
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Field(() => String)
   @Column()
+  name: string;
+
+  @Field(() => Number)
+  @Column({ type: 'float' })
   lat: number;
 
-  @Column()
+  @Field(() => Number)
+  @Column({ type: 'float' })
   lng: number;
 }
