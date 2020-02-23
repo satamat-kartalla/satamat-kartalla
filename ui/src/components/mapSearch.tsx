@@ -26,7 +26,7 @@ const MapSearch = ({ callback }: any) => {
       clearTimeout(searchTimeout)
     }
 
-    const timeout = setTimeout(() => fetchSearch(e), 1000)
+    const timeout = setTimeout(() => fetchSearch(e), 666)
     setSearchTimeout(timeout)
   }
 
