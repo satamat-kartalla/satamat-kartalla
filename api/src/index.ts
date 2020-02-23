@@ -2,7 +2,7 @@ import express, { Request, Response } from 'express';
 import bodyParser from 'body-parser';
 import { createConnection } from 'typeorm';
 import { Harbour } from './entity/Harbour';
-const { ApolloServer, gql } = require('apollo-server-express');
+import { ApolloServer, gql } from 'apollo-server-express';
 
 createConnection().then(connection => {
   const harbourRepository = connection.getRepository(Harbour);
