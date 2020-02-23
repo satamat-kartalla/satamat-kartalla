@@ -5,6 +5,7 @@ import axios from 'axios'
 type Timeout = ReturnType<typeof setTimeout>
 type PlaceInfo = {
   name: string
+  formatted_address: string
   geometry: { location: { lat: number; lng: number } }
 }
 type PlaceOption = {
@@ -31,12 +32,12 @@ const MapSearch = ({ callback }: any) => {
 
   const fetchSearch = async (query: string) => {
     const resp = await axios.get(`http://localhost:8888/search?query=${query}`)
-    console.log({ resp })
+    setOptions(parseResponse(resp.data))
   }
 
   const parseResponse = (resp: PlaceInfo[]) =>
     resp.map((r: PlaceInfo) => ({
-      label: r.name,
+      label: r.formatted_address,
       location: r.geometry.location,
     }))
 

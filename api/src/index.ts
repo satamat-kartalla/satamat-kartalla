@@ -1,5 +1,6 @@
 import express, { Request, Response } from 'express';
 import bodyParser from 'body-parser';
+import cors from 'cors';
 import { ApolloServer } from 'apollo-server-express';
 import { createConnection } from 'typeorm';
 import { buildSchema } from 'type-graphql';
@@ -16,15 +17,17 @@ async function main() {
   server.applyMiddleware({ app });
 
   app.use(bodyParser.json());
+  app.use(cors());
 
   app.get('/search', async function(req: Request, res: Response) {
     const BASE_URL =
       'https://maps.googleapis.com/maps/api/place/textsearch/json';
+    const { query } = req.query;
     const GOOGLE_MAPS_SETTINGS = {
       key: process.env.GOOGLE_MAPS_APIKEY,
       language: 'fi',
       region: 'fi',
-      ...req.query,
+      query: encodeURI(query),
     };
 
     const attributes: string = Object.entries(GOOGLE_MAPS_SETTINGS)
@@ -34,9 +37,9 @@ async function main() {
 
     try {
       const resp = await axios.get(url);
-      console.log({ resp });
+      res.json(resp.data.results);
     } catch (e) {
-      console.log({ e });
+      console.log(e.response.data);
     }
   });
 
