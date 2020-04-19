@@ -30,14 +30,24 @@ const MapContainer = () => {
   }
 
   return (
-    <div>
-      <MapSearch callback={searchPositionCallback} />
+    <>
+      <div
+        style={{
+          position: 'absolute',
+          top: '20px',
+          zIndex: 1000,
+          left: 'calc(50vw - 210px + 110px)',
+          width: '420px',
+        }}
+      >
+        <MapSearch callback={searchPositionCallback} />
+      </div>
       <Map onClick={addMarker} center={position} zoom={13}>
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <TileLayer url="https://t1.openseamap.org/seamark/{z}/{x}/{y}.png" />
         {markersToMap}
       </Map>
-    </div>
+    </>
   )
 }
 
