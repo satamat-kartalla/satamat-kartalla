@@ -2,12 +2,12 @@ import express, { Request, Response } from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import { ApolloServer } from 'apollo-server-express';
-import { createConnection } from 'typeorm';
-import { buildSchema } from 'type-graphql';
-import { HarbourResolver } from './resolvers/HarbourResolver';
 import axios from 'axios';
+import { buildSchema } from 'type-graphql';
+import { createConnection } from 'typeorm';
+import { HarbourResolver } from './resolvers/HarbourResolver';
 
-async function main() {
+async function main(): Promise<void> {
   await createConnection();
   const schema = await buildSchema({
     resolvers: [HarbourResolver],
