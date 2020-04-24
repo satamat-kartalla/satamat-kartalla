@@ -63,42 +63,42 @@ const MapSearch = ({ callback }: any) => {
 
 export default MapSearch
 
-const asd = {
-  html_attributions: [],
-  results: [
-    {
-      formatted_address: '21680 Nötö',
-      geometry: {
-        location: {
-          lat: 59.9554773,
-          lng: 21.7602174,
-        },
-        viewport: {
-          northeast: {
-            lat: 59.95827689999999,
-            lng: 21.7667913,
-          },
-          southwest: {
-            lat: 59.94697559999999,
-            lng: 21.7520369,
-          },
-        },
-      },
-      icon: 'https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png',
-      id: '835991441fb61c5f7bc9cd22a6a7c39b16b3bcd2',
-      name: 'Nötö',
-      photos: [
-        {
-          height: 1197,
-          photo_reference:
-            'CmRaAAAAysRIjSR9dOICHyYF_rvMrHsIRhisgOcbItSWpMiVSHrWIl044jGWoXWIGDt9Em-LPOMPA6zjqjzd6GLtj9oCd6Bg-6K2iAgh2ZS3CIBt62jEzSfTzqhyqzD4M_ffgHPJEhBAlxlEEUiqB3s81fBrmRZ3GhSwk8Q2fG_a5Mq8o2zHH9-wo4jm_w',
-          width: 1596,
-        },
-      ],
-      place_id: 'ChIJhf3vMk6ejEYRK2mq2U3ervM',
-      reference: 'ChIJhf3vMk6ejEYRK2mq2U3ervM',
-      types: ['locality', 'political'],
-    },
-  ],
-  status: 'OK',
-}
+// const asd = {
+//   html_attributions: [],
+//   results: [
+//     {
+//       formatted_address: '21680 Nötö',
+//       geometry: {
+//         location: {
+//           lat: 59.9554773,
+//           lng: 21.7602174,
+//         },
+//         viewport: {
+//           northeast: {
+//             lat: 59.95827689999999,
+//             lng: 21.7667913,
+//           },
+//           southwest: {
+//             lat: 59.94697559999999,
+//             lng: 21.7520369,
+//           },
+//         },
+//       },
+//       icon: 'https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png',
+//       id: '835991441fb61c5f7bc9cd22a6a7c39b16b3bcd2',
+//       name: 'Nötö',
+//       photos: [
+//         {
+//           height: 1197,
+//           photo_reference:
+//             'CmRaAAAAysRIjSR9dOICHyYF_rvMrHsIRhisgOcbItSWpMiVSHrWIl044jGWoXWIGDt9Em-LPOMPA6zjqjzd6GLtj9oCd6Bg-6K2iAgh2ZS3CIBt62jEzSfTzqhyqzD4M_ffgHPJEhBAlxlEEUiqB3s81fBrmRZ3GhSwk8Q2fG_a5Mq8o2zHH9-wo4jm_w',
+//           width: 1596,
+//         },
+//       ],
+//       place_id: 'ChIJhf3vMk6ejEYRK2mq2U3ervM',
+//       reference: 'ChIJhf3vMk6ejEYRK2mq2U3ervM',
+//       types: ['locality', 'political'],
+//     },
+//   ],
+//   status: 'OK',
+// }

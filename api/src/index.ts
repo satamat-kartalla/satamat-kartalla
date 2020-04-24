@@ -4,13 +4,16 @@ import cors from 'cors';
 import { ApolloServer } from 'apollo-server-express';
 import axios from 'axios';
 import { buildSchema } from 'type-graphql';
+import 'reflect-metadata';
 import { createConnection } from 'typeorm';
+
 import { HarbourResolver } from './resolvers/HarbourResolver';
+import { SeamarkResolver } from './resolvers/SeamarkResolver';
 
 async function main(): Promise<void> {
   await createConnection();
   const schema = await buildSchema({
-    resolvers: [HarbourResolver],
+    resolvers: [HarbourResolver, SeamarkResolver],
   });
   const server = new ApolloServer({ schema });
   const app = express();

@@ -1,29 +1,37 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
-import MapSearch from './mapSearch'
+import { useQuery } from '@apollo/client'
 
-type LatLong = {
-  lat: number
-  lng: number
-}
+import MapSearch from './mapSearch'
+import buoys from '../icons/buoy'
+import AddMapMarkerModal from './addMapMarkerModal'
+import { LatLong, Seamark } from '../types'
+import { GET_ALL_SEAMARKS } from '../gql/seamark'
 
 const MapContainer = () => {
-  const [markers, setMarkers] = useState<LatLong[]>([])
-  const [position, setPosition] = useState<LatLong>({ lat: 60.19, lng: 24.94 })
+  const { loading, error, data: seamarkData } = useQuery(GET_ALL_SEAMARKS)
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
+  const [position, setPosition] = useState<LatLong>({ lat: 59.92, lng: 22.42 })
+  const [selectedLocation, setSelectedLocation] = useState<LatLong | null>(null)
 
-  const addMarker = (e: { latlng: LatLong }) => {
-    setMarkers([...markers, e.latlng])
+  const handleModal = (e: { latlng: LatLong }) => {
+    setIsModalOpen(true)
+    setSelectedLocation(e.latlng)
   }
 
-  const markersToMap = markers.map((latlong: LatLong) => (
-    <Marker position={latlong} key={'' + latlong.lat + latlong.lng}>
-      <Popup>
-        <span>
-          A pretty CSS3 popup. <br /> Easily customizable.
-        </span>
-      </Popup>
-    </Marker>
-  ))
+  const markersToMap = seamarkData?.seamarks?.map(
+    ({ lat, lng, description, type }: Seamark) => (
+      <Marker
+        position={{ lat, lng }}
+        key={`${lat} + ${lng}`}
+        icon={buoys[type]}
+      >
+        <Popup>
+          <span>{description}</span>
+        </Popup>
+      </Marker>
+    ),
+  )
 
   const searchPositionCallback = (latlng: LatLong) => {
     setPosition(latlng)
@@ -31,6 +39,13 @@ const MapContainer = () => {
 
   return (
     <>
+      {selectedLocation && (
+        <AddMapMarkerModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          selectedLocation={selectedLocation}
+        />
+      )}
       <div
         style={{
           position: 'absolute',
@@ -42,7 +57,7 @@ const MapContainer = () => {
       >
         <MapSearch callback={searchPositionCallback} />
       </div>
-      <Map onClick={addMarker} center={position} zoom={13}>
+      <Map onClick={handleModal} center={position} zoom={13}>
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <TileLayer url="https://t1.openseamap.org/seamark/{z}/{x}/{y}.png" />
         {markersToMap}

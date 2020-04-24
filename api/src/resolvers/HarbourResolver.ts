@@ -12,6 +12,9 @@ class AddHarbourInput implements Partial<Harbour> {
 
   @Field()
   lng: number;
+
+  @Field()
+  description: string;
 }
 
 @Resolver(() => Harbour)
@@ -36,6 +39,7 @@ export class HarbourResolver {
     harbour.name = newHarbourData.name;
     harbour.lat = newHarbourData.lat;
     harbour.lng = newHarbourData.lng;
+    harbour.description = newHarbourData.description;
     await this.repository.save(harbour);
     return harbour;
   }

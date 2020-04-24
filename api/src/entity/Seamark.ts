@@ -3,25 +3,17 @@ import {
   Entity,
   Column,
   PrimaryGeneratedColumn,
-  OneToMany,
+  ManyToOne,
 } from 'typeorm';
 import { ObjectType, Field, ID } from 'type-graphql';
-import { Seamark } from './Seamark';
+import { Harbour } from './Harbour';
 
 @Entity()
 @ObjectType()
-export class Harbour extends BaseEntity {
+export class Seamark extends BaseEntity {
   @Field(() => ID)
   @PrimaryGeneratedColumn()
   id: number;
-
-  @Field(() => String)
-  @Column()
-  name: string;
-
-  @Field(() => String)
-  @Column({ nullable: true })
-  description: string;
 
   @Field(() => Number)
   @Column('float')
@@ -31,10 +23,18 @@ export class Harbour extends BaseEntity {
   @Column('float')
   lng: number;
 
-  @Field(() => [Seamark])
-  @OneToMany(
-    () => Seamark,
-    seamark => seamark.harbour,
+  @Field(() => Number)
+  @Column('int')
+  type: number;
+
+  @Field(() => String)
+  @Column('varchar')
+  description: string;
+
+  @Field(() => Harbour)
+  @ManyToOne(
+    () => Harbour,
+    harbour => harbour.seamarks,
   )
-  seamarks: Seamark[];
+  harbour: Harbour;
 }
