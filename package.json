@@ -1,0 +1,6 @@
+{
+  "scripts": {
+    "build": "cd api && npm install && npm run-script build",
+    "start": "cd api && npm run-script start"
+  }
+}
