@@ -8,7 +8,7 @@ const harbour = new L.Icon({
   shadowUrl: undefined,
   shadowSize: undefined,
   shadowAnchor: undefined,
-  iconSize: new L.Point(16, 24),
+  iconSize: new L.Point(32, 32),
   className: 'awesome-marker-icon-transparent',
 })
 

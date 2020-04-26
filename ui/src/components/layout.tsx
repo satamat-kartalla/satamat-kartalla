@@ -19,8 +19,6 @@ const Layout = ({ children }: { children: ReactNode }) => (
           />
           <VerticalItem name="item-1" label="Juttu" />
           <VerticalItem name="item-2" label="Toka Juttu" />
-          <VerticalItem name="item-3" label="Tässä on Tää" />
-          <VerticalItem name="item-4" label="Tuolla on Toi" />
         </VerticalSection>
       </VerticalNavigation>
     </div>

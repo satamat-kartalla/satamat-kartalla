@@ -22,12 +22,12 @@ export class HarbourResolver {
   repository = getRepository(Harbour);
 
   @Query(() => [Harbour])
-  getHarbours(): Promise<Harbour[]> {
+  harbours(): Promise<Harbour[]> {
     return Harbour.find();
   }
 
   @Query(() => Harbour)
-  getHarbour(@Arg('id') id: string): Promise<Harbour | undefined> {
+  harbour(@Arg('id') id: string): Promise<Harbour | undefined> {
     return Harbour.findOne({ where: { id } });
   }
 

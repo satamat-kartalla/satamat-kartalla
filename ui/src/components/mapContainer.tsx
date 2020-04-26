@@ -1,15 +1,18 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
 import { useQuery } from '@apollo/client'
 
 import MapSearch from './mapSearch'
-import buoys from '../icons/buoy'
+import buoyIcons from '../icons/buoy'
+import harbourIcon from '../icons/harbour'
 import AddMapMarkerModal from './addMapMarkerModal'
-import { LatLong, Seamark } from '../types'
+import { LatLong, Seamark, Harbour } from '../types'
 import { GET_ALL_SEAMARKS } from '../gql/seamark'
+import { GET_HARBOURS } from '../gql/harbour'
 
 const MapContainer = () => {
-  const { loading, error, data: seamarkData } = useQuery(GET_ALL_SEAMARKS)
+  const { data: seamarkData } = useQuery(GET_ALL_SEAMARKS)
+  const { data: harbourData } = useQuery(GET_HARBOURS)
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
   const [position, setPosition] = useState<LatLong>({ lat: 59.92, lng: 22.42 })
   const [selectedLocation, setSelectedLocation] = useState<LatLong | null>(null)
@@ -24,7 +27,21 @@ const MapContainer = () => {
       <Marker
         position={{ lat, lng }}
         key={`${lat} + ${lng}`}
-        icon={buoys[type]}
+        icon={buoyIcons[type]}
+      >
+        <Popup>
+          <span>{description}</span>
+        </Popup>
+      </Marker>
+    ),
+  )
+
+  const harboursToMap = harbourData?.harbours?.map(
+    ({ lat, lng, description }: Harbour) => (
+      <Marker
+        position={{ lat, lng }}
+        key={`${lat} + ${lng}`}
+        icon={harbourIcon}
       >
         <Popup>
           <span>{description}</span>
@@ -61,6 +78,7 @@ const MapContainer = () => {
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         <TileLayer url="https://t1.openseamap.org/seamark/{z}/{x}/{y}.png" />
         {markersToMap}
+        {harboursToMap}
       </Map>
     </>
   )

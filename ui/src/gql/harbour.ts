@@ -18,3 +18,13 @@ export const ADD_HARBOUR = gql`
     }
   }
 `
+export const GET_HARBOURS = gql`
+  query {
+    harbours {
+      id
+      lat
+      lng
+      description
+    }
+  }
+`
