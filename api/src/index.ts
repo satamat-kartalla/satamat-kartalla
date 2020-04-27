@@ -1,10 +1,10 @@
+import 'reflect-metadata';
 import express, { Request, Response } from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import { ApolloServer } from 'apollo-server-express';
 import axios from 'axios';
 import { buildSchema } from 'type-graphql';
-import 'reflect-metadata';
 import { createConnection } from 'typeorm';
 
 import { HarbourResolver } from './resolvers/HarbourResolver';

@@ -1,0 +1,9 @@
+export const type = 'postgres';
+export const host = process.env.TYPEORM_HOST;
+export const port = 5432;
+export const username = '';
+export const password = '';
+export const database = 'satamat-kartalla';
+export const entities = ['src/entity/*.ts'];
+export const logging = true;
+export const synchronize = true;
