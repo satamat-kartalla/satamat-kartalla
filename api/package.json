@@ -7,7 +7,7 @@
     "dev": "tsnd --respawn -r @babel/register src/index.ts",
     "build": "babel ./src -d ./dist --extensions '.ts'",
     "typecheck": "tsc",
-    "start": "ts-node src/index.ts",
+    "start": "ts-node -T src/index.ts",
     "oldstart": "node dist/index.js",
     "lint:base": "eslint --ext .js,.json,.ts",
     "lint": "yarn lint:base 'src/**'",
