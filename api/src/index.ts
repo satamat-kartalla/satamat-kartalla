@@ -46,7 +46,7 @@ async function main(): Promise<void> {
     }
   });
 
-  app.listen({ port: 8888 }, () =>
+  app.listen({ port: process.env.PORT || 8888 }, () =>
     console.log(
       `🚀 Server ready at http://localhost:8888${server.graphqlPath}`,
     ),
