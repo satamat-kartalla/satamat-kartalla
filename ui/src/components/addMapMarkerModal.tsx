@@ -3,7 +3,7 @@ import { useMutation, gql } from '@apollo/client'
 import { Modal } from 'react-rainbow-components'
 import { LatLong } from '../types'
 import { ADD_HARBOUR } from '../gql/harbour'
-import { ADD_SEAMARK, GET_ALL_SEAMARKS } from '../gql/seamark'
+import { ADD_SEAMARK, GET_SEAMARKS } from '../gql/seamark'
 
 type props = {
   isOpen: boolean
@@ -36,9 +36,9 @@ const AddMapMarkerModal = ({ isOpen, onClose, selectedLocation }: props) => {
   const [addHarbour, { data: harbourData }] = useMutation(ADD_HARBOUR)
   const [addSeamark, { data: seamarkData }] = useMutation(ADD_SEAMARK, {
     update(cache, { data: { addSeamark } }) {
-      const { seamarks }: any = cache.readQuery({ query: GET_ALL_SEAMARKS })
+      const { seamarks }: any = cache.readQuery({ query: GET_SEAMARKS })
       cache.writeQuery({
-        query: GET_ALL_SEAMARKS,
+        query: GET_SEAMARKS,
         data: { seamarks: seamarks.concat([addSeamark]) },
       })
     },

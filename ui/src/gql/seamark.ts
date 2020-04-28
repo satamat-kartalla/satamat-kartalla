@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client'
 
-export const GET_ALL_SEAMARKS = gql`
+export const GET_SEAMARKS = gql`
   {
     seamarks {
       id
@@ -17,7 +17,7 @@ export const ADD_SEAMARK = gql`
     $type: Float!
     $lat: Float!
     $lng: Float!
-    $description: String!
+    $description: String
   ) {
     addSeamark(
       seamark: { lat: $lat, lng: $lng, description: $description, type: $type }

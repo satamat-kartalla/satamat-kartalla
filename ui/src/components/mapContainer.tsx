@@ -7,11 +7,11 @@ import buoyIcons from '../icons/buoy'
 import harbourIcon from '../icons/harbour'
 import AddMapMarkerModal from './addMapMarkerModal'
 import { LatLong, Seamark, Harbour } from '../types'
-import { GET_ALL_SEAMARKS } from '../gql/seamark'
+import { GET_SEAMARKS } from '../gql/seamark'
 import { GET_HARBOURS } from '../gql/harbour'
 
 const MapContainer = () => {
-  const { data: seamarkData } = useQuery(GET_ALL_SEAMARKS)
+  const { data: seamarkData } = useQuery(GET_SEAMARKS)
   const { data: harbourData } = useQuery(GET_HARBOURS)
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
   const [position, setPosition] = useState<LatLong>({ lat: 59.92, lng: 22.42 })
@@ -30,7 +30,7 @@ const MapContainer = () => {
         icon={buoyIcons[type]}
       >
         <Popup>
-          <span>{description}</span>
+          <span>{description || 'Ei selitettä'}</span>
         </Popup>
       </Marker>
     ),
@@ -43,9 +43,11 @@ const MapContainer = () => {
         key={`${lat} + ${lng}`}
         icon={harbourIcon}
       >
-        <Popup>
-          <span>{description}</span>
-        </Popup>
+        {description && (
+          <Popup>
+            <span>{description}</span>
+          </Popup>
+        )}
       </Marker>
     ),
   )

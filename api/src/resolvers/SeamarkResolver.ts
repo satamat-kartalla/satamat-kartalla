@@ -13,7 +13,7 @@ class AddSeamarkInput implements Partial<Seamark> {
   @Field()
   type: number;
 
-  @Field()
+  @Field({ nullable: true })
   description: string;
 }
 

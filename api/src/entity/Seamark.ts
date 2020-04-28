@@ -27,8 +27,8 @@ export class Seamark extends BaseEntity {
   @Column('int')
   type: number;
 
-  @Field(() => String)
-  @Column('varchar')
+  @Field(() => String, { nullable: true })
+  @Column('varchar', { nullable: true })
   description: string;
 
   @Field(() => Harbour)
