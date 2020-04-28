@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "build": "cd api && npm i && npm run-script build",
-    "start": "cd api && npm run-script start"
+    "build": "cd api && npm i",
+    "start": "cd api && npm run start"
   }
 }

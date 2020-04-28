@@ -15,3 +15,7 @@ export const type = 'postgres';
 export const entities = ['src/entity/*.ts'];
 export const logging = true;
 export const synchronize = true;
+export const typeRoots = [
+  'node_modules/@types',
+  'node_modules/reflect-metadata',
+];
