@@ -17,10 +17,10 @@ async function main(): Promise<void> {
   });
   const server = new ApolloServer({ schema });
   const app = express();
-  server.applyMiddleware({ app });
+  server.applyMiddleware({ app, path: '/graphql' });
 
   app.use(bodyParser.json());
-  app.use(cors());
+  app.use('*', cors());
 
   app.get('/search', async function(req: Request, res: Response) {
     const BASE_URL =
