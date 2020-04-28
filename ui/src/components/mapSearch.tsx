@@ -31,7 +31,9 @@ const MapSearch = ({ callback }: any) => {
   }
 
   const fetchSearch = async (query: string) => {
-    const resp = await axios.get(`http://localhost:8888/search?query=${query}`)
+    const resp = await axios.get(
+      `${process.env.REACT_APP_API_URL}/search?query=${query}`,
+    )
     setOptions(parseResponse(resp.data))
   }
 
