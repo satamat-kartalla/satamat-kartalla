@@ -17,8 +17,8 @@ const Layout = ({ children }: { children: ReactNode }) => (
             label="SadamPåCarto"
             icon={<FontAwesomeIcon icon={faAnchor} />}
           />
-          <VerticalItem name="item-1" label="Juttu" />
-          <VerticalItem name="item-2" label="Toka Juttu" />
+          {/* <VerticalItem name="item-1" label="Juttu" />
+          <VerticalItem name="item-2" label="Toka Juttu" /> */}
         </VerticalSection>
       </VerticalNavigation>
     </div>

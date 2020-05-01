@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Map, Marker, Popup, TileLayer } from 'react-leaflet'
 import { useQuery } from '@apollo/client'
+import { usePosition } from 'use-position'
 
 import MapSearch from './mapSearch'
 import buoyIcons from '../icons/buoy'
@@ -13,9 +14,19 @@ import { GET_HARBOURS } from '../gql/harbour'
 const MapContainer = () => {
   const { data: seamarkData } = useQuery(GET_SEAMARKS)
   const { data: harbourData } = useQuery(GET_HARBOURS)
+  const { latitude, longitude, timestamp, errorMessage } = usePosition(true)
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
   const [position, setPosition] = useState<LatLong>({ lat: 59.92, lng: 22.42 })
   const [selectedLocation, setSelectedLocation] = useState<LatLong | null>(null)
+
+  useEffect(() => {
+    console.log(latitude, longitude, timestamp)
+    latitude && longitude && setPosition({ lat: latitude, lng: longitude })
+  }, [timestamp, latitude, longitude, errorMessage])
+
+  const userLocationMarker = latitude && longitude && (
+    <Marker position={{ lat: latitude, lng: longitude }} icon={harbourIcon} />
+  )
 
   const handleModal = (e: { latlng: LatLong }) => {
     setIsModalOpen(true)
@@ -81,6 +92,7 @@ const MapContainer = () => {
         <TileLayer url="https://t1.openseamap.org/seamark/{z}/{x}/{y}.png" />
         {markersToMap}
         {harboursToMap}
+        {userLocationMarker}
       </Map>
     </>
   )

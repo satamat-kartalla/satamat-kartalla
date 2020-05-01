@@ -53,6 +53,7 @@
     "@types/node": "^12.12.28",
     "@types/react-dom": "^16.9.5",
     "@types/react-leaflet": "^2.5.0",
+    "@types/use-position": "0.0.0",
     "axios": "^0.19.2",
     "db-migrate-pg": "^1.2.1",
     "graphql": "^15.0.0",
@@ -62,7 +63,8 @@
     "react-leaflet": "^2.6.1",
     "react-rainbow-components": "^1.12.0",
     "react-scripts": "3.4.0",
-    "typescript": "^3.7.5"
+    "typescript": "^3.7.5",
+    "use-position": "0.0.7"
   },
   "devDependencies": {
     "@types/react": "^16.9.17",
