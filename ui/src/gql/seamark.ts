@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client'
+import { gql, useMutation } from '@apollo/client'
 
 export const GET_SEAMARKS = gql`
   {
@@ -30,3 +30,17 @@ export const ADD_SEAMARK = gql`
     }
   }
 `
+
+export const useAddSeamark = () => {
+  const [addSeamark, { data }] = useMutation(ADD_SEAMARK, {
+    update(cache, { data: { addSeamark } }) {
+      const { seamarks }: any = cache.readQuery({ query: GET_SEAMARKS })
+      cache.writeQuery({
+        query: GET_SEAMARKS,
+        data: { seamarks: seamarks.concat([addSeamark]) },
+      })
+    },
+  })
+
+  return [addSeamark, data]
+}

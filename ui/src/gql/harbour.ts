@@ -1,4 +1,4 @@
-import { gql } from '@apollo/client'
+import { gql, useMutation } from '@apollo/client'
 
 export const ADD_HARBOUR = gql`
   mutation AddHarbour(
@@ -29,3 +29,17 @@ export const GET_HARBOURS = gql`
     }
   }
 `
+
+export const useAddHarbour = () => {
+  const [addHarbour, { data }] = useMutation(ADD_HARBOUR, {
+    update(cache, { data: { addHarbour } }) {
+      const { harbours }: any = cache.readQuery({ query: GET_HARBOURS })
+      cache.writeQuery({
+        query: GET_HARBOURS,
+        data: { harbours: harbours.concat([addHarbour]) },
+      })
+    },
+  })
+
+  return [addHarbour, data]
+}

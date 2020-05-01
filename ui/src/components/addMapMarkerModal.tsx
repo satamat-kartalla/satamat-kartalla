@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react'
-import { useMutation, gql } from '@apollo/client'
+import React, { useState } from 'react'
 import { Modal } from 'react-rainbow-components'
 import { LatLong } from '../types'
-import { ADD_HARBOUR, GET_HARBOURS } from '../gql/harbour'
-import { ADD_SEAMARK, GET_SEAMARKS } from '../gql/seamark'
+import { useAddHarbour } from '../gql/harbour'
+import { useAddSeamark } from '../gql/seamark'
 
 type props = {
   isOpen: boolean
@@ -33,24 +32,8 @@ type NewMarkData = {
 const AddMapMarkerModal = ({ isOpen, onClose, selectedLocation }: props) => {
   const { lat, lng } = selectedLocation
   const [newMarkData, setNewMarkData] = useState<Partial<NewMarkData>>({})
-  const [addHarbour] = useMutation(ADD_HARBOUR, {
-    update(cache, { data: { addHarbour } }) {
-      const { harbours }: any = cache.readQuery({ query: GET_HARBOURS })
-      cache.writeQuery({
-        query: GET_HARBOURS,
-        data: { harbours: harbours.concat([addHarbour]) },
-      })
-    },
-  })
-  const [addSeamark] = useMutation(ADD_SEAMARK, {
-    update(cache, { data: { addSeamark } }) {
-      const { seamarks }: any = cache.readQuery({ query: GET_SEAMARKS })
-      cache.writeQuery({
-        query: GET_SEAMARKS,
-        data: { seamarks: seamarks.concat([addSeamark]) },
-      })
-    },
-  })
+  const [addHarbour] = useAddHarbour()
+  const [addSeamark] = useAddSeamark()
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()

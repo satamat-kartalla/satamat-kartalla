@@ -20,7 +20,6 @@ const MapContainer = () => {
   const [selectedLocation, setSelectedLocation] = useState<LatLong | null>(null)
 
   useEffect(() => {
-    console.log(latitude, longitude, timestamp)
     latitude && longitude && setPosition({ lat: latitude, lng: longitude })
   }, [timestamp, latitude, longitude, errorMessage])
 
